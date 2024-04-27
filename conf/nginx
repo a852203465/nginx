@@ -1,0 +1,15 @@
+{{LOGS_PATH}}/*.log {
+    daily
+    missingok
+    rotate {{SAVE_DAYS}}
+    nocompress
+    notifempty
+    noolddir
+    create 0640 nginx nginx
+    dateext
+    dateformat -%Y%m%d
+    sharedscripts
+    postrotate
+        [ -f /run/nginx.pid ] && kill -USR1 `cat /run/nginx.pid`
+    endscript
+}
